@@ -30,7 +30,8 @@ module Iridium
       end
 
       def callback(set, *args, &block)
-        options = args.extract_options!
+        options = args.last.is_a?(Hash) ? args.pop : {}
+
         options[:class] = self
         args << options
         super set, *args, &block
